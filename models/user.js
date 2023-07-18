@@ -13,6 +13,7 @@
 // Create a model file for users
 const mongoose = require('mongoose')
 
+
 const userSchema = new mongoose.Schema({
   name: {type: String, required: true},
   email: {
@@ -27,6 +28,10 @@ const userSchema = new mongoose.Schema({
     trim: true,
     minLength: 3,
     required: true
+  },
+  recipes: {
+    type: String,
+    ref: 'Recipe'
   }
 }, {
   timestamps: true,
