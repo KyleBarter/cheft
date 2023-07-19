@@ -29,10 +29,10 @@ const userSchema = new mongoose.Schema({
     minLength: 3,
     required: true
   },
-  recipes: {
-    type: String,
+  recipes: [{
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Recipe'
-  }
+  }]
 }, {
   timestamps: true,
   toJSON: {

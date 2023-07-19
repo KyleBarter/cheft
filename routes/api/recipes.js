@@ -14,6 +14,7 @@ router.post("/", recipeCtrl.create);
 
 //? PUT routes
 router.put("/:id", recipeCtrl.update);
+router.put("/", recipeCtrl.saved)
 
 //? DELETE routes
 router.delete("/:id", recipeCtrl.deleteRecipe)

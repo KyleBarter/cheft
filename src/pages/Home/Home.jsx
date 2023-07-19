@@ -7,23 +7,22 @@ export default function MyRecipesList(){
     const [recipes, setRecipes] = useState([])
 
     useEffect(() => {
-        async function getAllUserRecipe(){
+        async function getAllRecipe(){
             try {
-                const recipe = recipes.filter( recipe => recipe._id.equals(recipe.user))
                 const data = await recipeAPI.getAllRecipes()
                 setRecipes(data)
             } catch (err) {
                 console.log('Get all recipe err: ', err)
             }
         }
-        getAllUserRecipe()
+        getAllRecipe()
     }, [])
 
     return (
-        <div className='user-recipes'>
+        <div className='home-recipes'>
           <ul>
             {recipes.map((recipe) => (
-                <li key={recipe._id} className='recipe-item'>
+                <li key={recipe._id} className='home-recipe-item'>
                     <Link key={recipe._id} to={`/recipes/${recipe._id}`} className='custom-link'>
                         <div className='user-recipes'>
                             {recipe.name}   

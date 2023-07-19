@@ -10,6 +10,14 @@ export function getSingleRecipe(id){
     return sendRequest(`${BASE_URL}/${id}`)
 }
 
-export function addRecipe(){
-    return sendRequest(`${BASE_URL}`, 'POST')
+export function addRecipe(formData){
+    return sendRequest(`${BASE_URL}`, 'POST', formData)
+}
+
+export function editRecipe(id, formData){
+    return sendRequest(`${BASE_URL}/${id}`, 'PUT', formData)
+}
+
+export function deleteRecipe(recipeId){
+    return sendRequest(`${BASE_URL}/${recipeId}`, 'DELETE')
 }

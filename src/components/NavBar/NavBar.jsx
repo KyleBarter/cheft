@@ -8,7 +8,7 @@ export default function NavBar({ user, setUser }) {
   }
   return (
     <nav>
-      <h1>Cheft</h1>
+      <h1 id="cheft">Cheft</h1>
       <div id="nav-links">
         <Link to="/">Home</Link>
         <Link to="/recipes">My recipes</Link>

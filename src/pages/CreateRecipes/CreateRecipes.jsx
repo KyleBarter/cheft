@@ -1,16 +1,23 @@
 import { useState } from 'react'
+import * as recipeAPI from '../../utilities/recipes-api'
+import { useNavigate } from 'react-router-dom'
 
 export default function CreateRecipes() {
   // async function handleCheckToken(){
   //   const expDate = await checkToken();
   //   console.log(expDate)
   // }
-  const [recipes, setRecipe] = useState({
+  const navigate = useNavigate()
+
+  const initialState = {
     name: '',
     ingredients: [],
     instructions: '',
     prepTime: '',
-  })
+  }
+
+  const [recipes, setRecipe] = useState(initialState)
+
   function addIngredient() {
     setRecipe({ ...recipes, ingredients: [...recipes.ingredients, ""]})
   }
@@ -25,15 +32,21 @@ export default function CreateRecipes() {
     setRecipe({ ...recipes, [name]: value})
   }
 
-  function handleSubmit(newRecipe, evt){
-    console.log('submit')
+  async function handleSubmit(evt){
     evt.preventDefault()
-    setRecipe([...recipes, newRecipe])
+    try {
+      const res = await recipeAPI.addRecipe(recipes)
+      console.log(res._id)
+      navigate(`/recipes/${res._id}`)
+
+    } catch (err) {
+      console.log('handle submit err:', err)
+    }
   }
 
 
   return (
-    <>
+    <div className='create-parent'>
       <form className="create-recipe" onSubmit={handleSubmit}>
           <input 
             type="text" 
@@ -76,7 +89,7 @@ export default function CreateRecipes() {
           <button type="submit">Create recipe</button>
       </form>
       {/* <button onClick={handleCheckToken}>Check when my login expires</button> */}
-    </>
+    </div>
 
   );
 }
